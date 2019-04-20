@@ -7,12 +7,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
+
+
 public class MainActivity extends AppCompatActivity {
 
     /**
      * We create a simple worker
      */
-    private SimpleWorker worker;
+    private Worker worker;
     private TextView tvMessage;
 
     /**
@@ -40,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
          * As soon the worker is created, the thread will start running
          */
 
-        worker = new SimpleWorker();
+        worker = new Worker();
 
         /**
          * Now we enqueue the task for the worker to perform
@@ -87,17 +89,20 @@ public class MainActivity extends AppCompatActivity {
                 }
                 Message message = Message.obtain();
                 message.obj = "Task 3 completed";
+
+                /**
+                 * For setting a value to a TextView to be set, we've to
+                 * supply a message from a worker thread to
+                 * the main thread and main thread will then update the
+                 * text message.
+                 * So for communicating with the main thread we require a Handler
+                 */
+
                 handler.sendMessage(message);
             }
         });
 
-        /**
-         * For setting a value to a TextView to be set, we've to
-         * supply a message from a worker thread to
-         * the main thread and main thread will then update the
-         * text message.
-         * So for communicating with the main thread we require a Handler
-         */
+
 
     }
 }

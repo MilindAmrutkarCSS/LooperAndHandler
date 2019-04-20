@@ -5,6 +5,15 @@ import android.util.Log;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+/**
+ * We have a SimpleWorker which extends a Thread.
+ * There's a flag 'alive' which keeps the thread running in a while loop
+ * We've a taskQueue, whenever a Task is enqueued, we're into the queue
+ * Whenever a task is there in the queue, the thread after finishing the
+ * previous task will dequeue this queue and then run the runnable
+ * which is supplied into the task queue.
+ */
+
 public class SimpleWorker extends Thread {
 
     private static final String TAG = "SimpleWorker";
